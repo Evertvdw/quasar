@@ -29,7 +29,7 @@ let newDate = addToDate(new Date(), { days: 7, month: 1 })
 ```
 
 ::: tip
-For usage with the UMD build see [here](/start/umd#Quasar-Global-Object).
+For usage with the UMD build see [here](/start/umd#quasar-global-object).
 :::
 
 ## Format for display
@@ -212,6 +212,13 @@ if (date.isBetweenDates(dateTarget, dateFrom, dateTo)) {
 
 // including which margin you want
 if (date.isBetweenDates(dateTarget, dateFrom, dateTo, { inclusiveFrom: true, inclusiveTo: true })) {
+  // Do something with dateTarget
+}
+
+// (Quasar v1.9.9+)
+// if you only care about comparing dates (year/month/day, regardless of time)
+// then you could tip isBetweenDates() about it so it can perform best:
+if (date.isBetweenDates(dateTarget, dateFrom, dateTo, { onlyDate: true })) {
   // Do something with dateTarget
 }
 ```

@@ -110,26 +110,29 @@ export default {
     },
 
     slugifiedTitle () {
-      return 'Example--' + slugify(this.title)
+      return 'example--' + slugify(this.title)
     }
   },
 
   mounted () {
-    import(
-      /* webpackChunkName: "demo" */
-      /* webpackMode: "lazy-once" */
-      'examples/' + this.file + '.vue'
-    ).then(comp => {
-      this.component = comp.default
-      this.loading = false
-    })
+    Promise.all([
+      import(
+        /* webpackChunkName: "demo" */
+        /* webpackMode: "lazy-once" */
+        'examples/' + this.file + '.vue'
+      ).then(comp => {
+        this.component = comp.default
+      }),
 
-    import(
-      /* webpackChunkName: "demo-source" */
-      /* webpackMode: "lazy-once" */
-      '!raw-loader!examples/' + this.file + '.vue'
-    ).then(comp => {
-      this.parseComponent(comp.default)
+      import(
+        /* webpackChunkName: "demo-source" */
+        /* webpackMode: "lazy-once" */
+        '!raw-loader!examples/' + this.file + '.vue'
+      ).then(comp => {
+        this.parseComponent(comp.default)
+      })
+    ]).then(() => {
+      this.loading = false
     })
   },
 

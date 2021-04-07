@@ -5,6 +5,7 @@ import QIcon from '../icon/QIcon.js'
 
 import FabMixin from '../../mixins/fab.js'
 
+import { noop } from '../../utils/event.js'
 import { mergeSlot } from '../../utils/slot.js'
 
 const anchorMap = {
@@ -23,7 +24,7 @@ export default Vue.extend({
   props: {
     icon: {
       type: String,
-      required: true
+      default: ''
     },
 
     anchor: {
@@ -31,14 +32,17 @@ export default Vue.extend({
       validator: v => anchorValues.includes(v)
     },
 
-    to: [String, Object],
+    to: [ String, Object ],
     replace: Boolean
   },
 
   inject: {
-    __qFabClose: {
+    __qFab: {
       default () {
-        console.error('QFabAction needs to be child of QFab')
+        return {
+          showing: true,
+          __onChildClick: noop
+        }
       }
     }
   },
@@ -47,22 +51,35 @@ export default Vue.extend({
     classes () {
       const align = anchorMap[this.anchor]
       return this.formClass + (align !== void 0 ? ` ${align}` : '')
+    },
+
+    onEvents () {
+      return {
+        ...this.qListeners,
+        click: this.click
+      }
+    },
+
+    isDisabled () {
+      return this.__qFab.showing !== true || this.disable === true
     }
   },
 
   methods: {
     click (e) {
-      this.__qFabClose()
+      this.__qFab.__onChildClick(e)
       this.$emit('click', e)
     }
   },
 
   render (h) {
-    const child = [
+    const child = []
+
+    this.icon !== '' && child.push(
       h(QIcon, {
         props: { name: this.icon }
       })
-    ]
+    )
 
     this.label !== '' && child[this.labelProps.action](
       h('div', this.labelProps.data, [ this.label ])
@@ -77,12 +94,10 @@ export default Vue.extend({
         icon: void 0,
         label: void 0,
         noCaps: true,
-        fabMini: true
+        fabMini: true,
+        disable: this.isDisabled
       },
-      on: {
-        ...this.$listeners,
-        click: this.click
-      }
+      on: this.onEvents
     }, mergeSlot(child, this, 'default'))
   }
 })

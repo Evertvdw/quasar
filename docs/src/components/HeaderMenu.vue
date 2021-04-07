@@ -20,6 +20,20 @@ div
 
       q-separator.q-mb-sm.q-mt-md
 
+      q-item-label(header) Beta Releases
+      q-item(
+        clickable
+        tag="a"
+        :href="`https://next.quasar.dev/start/upgrade-guide`"
+        target="_blank"
+        rel="noopener"
+      )
+        q-item-section.text-negative(avatar)
+          q-icon(:name="mdiFire")
+        q-item-section v2 beta docs
+
+      q-separator.q-mb-sm.q-mt-md
+
       q-item-label(header) Older Releases
       q-item(
         v-for="version in ['17', '16', '15', '14', '13']"
@@ -46,6 +60,14 @@ div
 
       q-item-label.q-mt-md(header) Helpers
 
+      q-item(clickable, to="/icongenie")
+        q-item-section.text-red(avatar)
+          q-icon(:name="mdiStarCircle")
+        q-item-section
+          .row.no-wrap.items-center
+            span Icon Genie CLI
+            //- q-badge.q-ml-sm new
+
       q-item(clickable, to="/style/theme-builder")
         q-item-section.text-teal(avatar)
           q-icon(:name="mdiPaletteSwatch")
@@ -54,12 +76,9 @@ div
       q-item(clickable, to="/style/dark-mode")
         q-item-section(avatar)
           q-icon(:name="mdiInvertColors")
-        q-item-section
-          .row.no-wrap.items-center
-            span Dark Mode
-            q-badge.q-ml-sm new
+        q-item-section Dark Mode
 
-      q-item(clickable, tag="a", href="/layout-builder", target="_blank")
+      q-item(clickable, tag="a", href="layout-builder", target="_blank")
         q-item-section.text-primary(avatar)
           q-icon(:name="mdiViewDashboard")
         q-item-section Layout Builder
@@ -153,8 +172,8 @@ import {
   mdiBlogger, mdiForum, mdiChat, mdiBullhorn,
   mdiViewDashboard, mdiShoppingMusic, mdiClipboardText,
   mdiBugCheck, mdiFlare, mdiFilePlus, mdiPaletteSwatch,
-  mdiInvertColors, mdiCharity
-} from '@quasar/extras/mdi-v4'
+  mdiInvertColors, mdiCharity, mdiStarCircle, mdiFire
+} from '@quasar/extras/mdi-v5'
 
 export default {
   name: 'HeaderMenu',
@@ -185,6 +204,8 @@ export default {
     this.mdiPaletteSwatch = mdiPaletteSwatch
     this.mdiInvertColors = mdiInvertColors
     this.mdiCharity = mdiCharity
+    this.mdiStarCircle = mdiStarCircle
+    this.mdiFire = mdiFire
   }
 }
 </script>

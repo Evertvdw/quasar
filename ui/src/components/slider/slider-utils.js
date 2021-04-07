@@ -2,15 +2,18 @@ import { between } from '../../utils/format.js'
 import { position } from '../../utils/event.js'
 
 import FormMixin from '../../mixins/form.js'
+import DarkMixin from '../../mixins/dark.js'
 import TouchPan from '../../directives/TouchPan.js'
 
 // PGDOWN, LEFT, DOWN, PGUP, RIGHT, UP
-export const keyCodes = [34, 37, 40, 33, 39, 38]
+export const keyCodes = [ 34, 37, 40, 33, 39, 38 ]
 
-export function getRatio (evt, dragging, reverse) {
+export function getRatio (evt, dragging, reverse, vertical) {
   const
     pos = position(evt),
-    val = between((pos.left - dragging.left) / dragging.width, 0, 1)
+    val = vertical === true
+      ? between((pos.top - dragging.top) / dragging.height, 0, 1)
+      : between((pos.left - dragging.left) / dragging.width, 0, 1)
 
   return reverse === true ? 1.0 - val : val
 }
@@ -30,9 +33,7 @@ export function getModel (ratio, min, max, step, decimals) {
   return between(model, min, max)
 }
 
-import DarkMixin from '../../mixins/dark.js'
-
-export let SliderMixin = {
+export const SliderMixin = {
   mixins: [ DarkMixin, FormMixin ],
 
   directives: {
@@ -65,11 +66,12 @@ export let SliderMixin = {
     markers: Boolean,
     snap: Boolean,
 
+    vertical: Boolean,
     reverse: Boolean,
 
     disable: Boolean,
     readonly: Boolean,
-    tabindex: [String, Number],
+    tabindex: [ String, Number ],
 
     thumbPath: {
       type: String,
@@ -86,21 +88,24 @@ export let SliderMixin = {
   },
 
   computed: {
+    axis () {
+      return this.vertical === true ? '--v' : '--h'
+    },
+
     classes () {
-      return `q-slider q-slider--${this.active === true ? '' : 'in'}active` +
+      return `q-slider q-slider${this.axis} q-slider--${this.active === true ? '' : 'in'}active` +
         (this.isReversed === true ? ' q-slider--reversed' : '') +
         (this.color !== void 0 ? ` text-${this.color}` : '') +
-        (this.disable === true ? ' disabled' : '') +
-        (this.editable === true ? ' q-slider--editable' : '') +
+        (this.disable === true ? ' disabled' : ' q-slider--enabled' + (this.editable === true ? ' q-slider--editable' : '')) +
         (this.focus === 'both' ? ' q-slider--focus' : '') +
         (this.label || this.labelAlways === true ? ' q-slider--label' : '') +
         (this.labelAlways === true ? ' q-slider--label-always' : '') +
         (this.isDark === true ? ' q-slider--dark' : '') +
-        (this.dense === true ? ' q-slider--dense' : '')
+        (this.dense === true ? ' q-slider--dense q-slider--dense' + this.axis : '')
     },
 
     editable () {
-      return !this.disable && !this.readonly
+      return this.disable !== true && this.readonly !== true && this.min < this.max
     },
 
     decimals () {
@@ -111,9 +116,19 @@ export let SliderMixin = {
       return this.step === 0 ? 1 : this.step
     },
 
+    minMaxDiff () {
+      return this.max - this.min
+    },
+
     markerStyle () {
-      return {
-        backgroundSize: 100 * this.computedStep / (this.max - this.min) + '% 2px'
+      if (this.minMaxDiff !== 0) {
+        const size = 100 * this.computedStep / this.minMaxDiff
+
+        return {
+          backgroundSize: this.vertical === true
+            ? '2px ' + size + '%'
+            : size + '% 2px'
+        }
       }
     },
 
@@ -122,11 +137,59 @@ export let SliderMixin = {
     },
 
     isReversed () {
-      return this.reverse !== (this.$q.lang.rtl === true)
+      return this.vertical === true
+        ? this.reverse === true
+        : this.reverse !== (this.$q.lang.rtl === true)
     },
 
-    horizProp () {
+    positionProp () {
+      if (this.vertical === true) {
+        return this.isReversed === true ? 'bottom' : 'top'
+      }
       return this.isReversed === true ? 'right' : 'left'
+    },
+
+    sizeProp () {
+      return this.vertical === true ? 'height' : 'width'
+    },
+
+    orientation () {
+      return this.vertical === true ? 'vertical' : 'horizontal'
+    },
+
+    attrs () {
+      const attrs = {
+        role: 'slider',
+        'aria-valuemin': this.min,
+        'aria-valuemax': this.max,
+        'aria-orientation': this.orientation,
+        'data-step': this.step
+      }
+
+      if (this.disable === true) {
+        attrs['aria-disabled'] = 'true'
+      }
+      else if (this.readonly === true) {
+        attrs['aria-readonly'] = 'true'
+      }
+
+      return attrs
+    },
+
+    panDirectives () {
+      return this.editable === true
+        ? [{
+          name: 'touch-pan',
+          value: this.__pan,
+          modifiers: {
+            [ this.orientation ]: true,
+            prevent: true,
+            stop: true,
+            mouse: true,
+            mouseAllDir: true
+          }
+        }]
+        : null
     }
   },
 
@@ -134,7 +197,13 @@ export let SliderMixin = {
     __getThumbSvg (h) {
       return h('svg', {
         staticClass: 'q-slider__thumb absolute',
-        attrs: { focusable: 'false' /* needed for IE11 */, viewBox: '0 0 20 20', width: '20', height: '20' }
+        attrs: {
+          focusable: 'false', /* needed for IE11 */
+          viewBox: '0 0 20 20',
+          width: '20',
+          height: '20',
+          'aria-hidden': 'true'
+        }
       }, [
         h('path', {
           attrs: {
@@ -145,6 +214,10 @@ export let SliderMixin = {
     },
 
     __getPinStyle (percent, ratio) {
+      if (this.vertical === true) {
+        return {}
+      }
+
       const offset = `${Math.ceil(20 * Math.abs(0.5 - ratio))}px`
       return {
         pin: {
@@ -160,11 +233,12 @@ export let SliderMixin = {
 
     __pan (event) {
       if (event.isFinal) {
-        if (this.dragging) {
+        if (this.dragging !== void 0) {
           this.__updatePosition(event.evt)
           // only if touch, because we also have mousedown/up:
           event.touch === true && this.__updateValue(true)
-          this.dragging = false
+          this.dragging = void 0
+          this.$emit('pan', 'end')
         }
         this.active = false
       }
@@ -173,6 +247,7 @@ export let SliderMixin = {
         this.__updatePosition(event.evt)
         this.__updateValue()
         this.active = true
+        this.$emit('pan', 'start')
       }
       else {
         this.__updatePosition(event.evt)
@@ -196,7 +271,10 @@ export let SliderMixin = {
 
     __deactivate () {
       this.preventFocus = false
-      this.active = false
+
+      if (this.dragging === void 0) {
+        this.active = false
+      }
 
       this.__updateValue(true)
       this.__blur()

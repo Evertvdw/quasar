@@ -33,28 +33,11 @@ After installing PM2 on your server, your npm start script can look like this in
 }
 ```
 
-## Deploying with Now.sh
-Deploying with [Now](https://zeit.co/now) is a breeze. All you need to do is to follow their [installation instructions](https://zeit.co/now#get-started). They recommend downloading "Now Desktop" but you can skip that and directly install the Now CLI:
+## Deploying with Cleavr
+You can use [Cleavr](https://cleavr.io) to deploy Quasar SSR apps to several popular VPS providers. Cleavr will automatically set up PM2 with cluster mode enabled for your app.
 
-```bash
-$ npm install -g now
-$ now login
-```
+Add a new **NodeJS SSR** site to Cleavr and then configure the web app settings with the following: 
 
-There are several ways to use the v1 of now's services:
-
-The robust way is to add the following file to `/dist/ssr/now.json` , and it should look like this:
-```
-{
-  "name": "Your Project Name",
-  "version": 1
-}
-```
-
-And then cd into the distributables folder and run `$ now`. If you do it this way, then you can also execute directly from a github repo, but we'll leave the details of setting that up to you.
-
-If you prefer, however, to set the version from the command line, you can also run `now -V 1`.
-
-At any rate, you might want to use a "now alias" or connect your domain to Now. And you're done!
-
-`Now.sh` will install the dependencies automatically then run `$ yarn start`. Your website will be up and running on an HTTPS connection in a matter of seconds!
+- **Entry point:** index.js
+- **Build command:** npx quasar build --mode ssr
+- **Artifact path:** dist/ssr

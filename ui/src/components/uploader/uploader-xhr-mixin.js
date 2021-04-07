@@ -6,21 +6,21 @@ function getFn (prop) {
 
 export default {
   props: {
-    url: [Function, String],
+    url: [ Function, String ],
     method: {
-      type: [Function, String],
+      type: [ Function, String ],
       default: 'POST'
     },
     fieldName: {
-      type: [Function, String],
+      type: [ Function, String ],
       default: file => file.name
     },
-    headers: [Function, Array],
-    formFields: [Function, Array],
-    withCredentials: [Function, Boolean],
-    sendRaw: [Function, Boolean],
+    headers: [ Function, Array ],
+    formFields: [ Function, Array ],
+    withCredentials: [ Function, Boolean ],
+    sendRaw: [ Function, Boolean ],
 
-    batch: [Function, Boolean],
+    batch: [ Function, Boolean ],
     factory: Function
   },
 
@@ -236,7 +236,7 @@ export default {
           form.append(getProp('fieldName', file), file, file.name)
         }
         file.xhr = xhr
-        file.__abort = xhr.abort
+        file.__abort = () => { xhr.abort() }
         maxUploadSize += file.size
       })
 

@@ -1,9 +1,20 @@
 import AlignMixin from './align.js'
 import RippleMixin from './ripple.js'
+import ListenersMixin from './listeners.js'
 import { getSizeMixin } from './size.js'
+
+const padding = {
+  none: 0,
+  xs: 4,
+  sm: 8,
+  md: 16,
+  lg: 24,
+  xl: 32
+}
 
 export default {
   mixins: [
+    ListenersMixin,
     RippleMixin,
     AlignMixin,
     getSizeMixin({
@@ -17,10 +28,12 @@ export default {
 
   props: {
     type: String,
-    to: [Object, String],
-    replace: Boolean,
 
-    label: [Number, String],
+    to: [ Object, String ],
+    replace: Boolean,
+    append: Boolean,
+
+    label: [ Number, String ],
     icon: String,
     iconRight: String,
 
@@ -35,6 +48,7 @@ export default {
     size: String,
     fab: Boolean,
     fabMini: Boolean,
+    padding: String,
 
     color: String,
     textColor: String,
@@ -42,7 +56,7 @@ export default {
     noWrap: Boolean,
     dense: Boolean,
 
-    tabindex: [Number, String],
+    tabindex: [ Number, String ],
 
     align: { default: 'center' },
     stack: Boolean,
@@ -89,18 +103,45 @@ export default {
       return 'standard'
     },
 
-    attrs () {
-      const att = { tabindex: this.computedTabIndex }
-      if (this.type !== 'a') {
-        att.type = this.type || 'button'
-      }
+    currentLocation () {
       if (this.hasRouterLink === true) {
-        att.href = this.$router.resolve(this.to).href
+        // we protect from accessing this.$route without
+        // actually needing it so that we won't trigger
+        // unnecessary updates
+        return this.append === true
+          ? this.$router.resolve(this.to, this.$route, true)
+          : this.$router.resolve(this.to)
       }
+    },
+
+    attrs () {
+      const attrs = { tabindex: this.computedTabIndex }
+
+      if (this.type !== 'a') {
+        attrs.type = this.type || 'button'
+      }
+
+      if (this.hasRouterLink === true) {
+        attrs.href = this.currentLocation.href
+        attrs.role = 'link'
+      }
+      else {
+        attrs.role = this.type === 'a' ? 'link' : 'button'
+      }
+
+      if (this.loading === true && this.percentage !== void 0) {
+        attrs.role = 'progressbar'
+        attrs['aria-valuemin'] = 0
+        attrs['aria-valuemax'] = 100
+        attrs['aria-valuenow'] = this.percentage
+      }
+
       if (this.disable === true) {
-        att.disabled = true
+        attrs.disabled = ''
+        attrs['aria-disabled'] = 'true'
       }
-      return att
+
+      return attrs
     },
 
     classes () {
@@ -134,6 +175,19 @@ export default {
       return this.alignClass + (this.stack === true ? ' column' : ' row') +
         (this.noWrap === true ? ' no-wrap text-no-wrap' : '') +
         (this.loading === true ? ' q-btn__content--hidden' : '')
+    },
+
+    wrapperStyle () {
+      if (this.padding !== void 0) {
+        return {
+          padding: this.padding
+            .split(/\s+/)
+            .map(v => v in padding ? padding[v] + 'px' : v)
+            .join(' '),
+          minWidth: '0',
+          minHeight: '0'
+        }
+      }
     }
   }
 }

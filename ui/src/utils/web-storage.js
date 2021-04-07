@@ -29,16 +29,14 @@ function encode (value) {
 }
 
 function decode (value) {
-  let type, length, source
-
-  length = value.length
+  const length = value.length
   if (length < 9) {
     // then it wasn't encoded by us
     return value
   }
 
-  type = value.substr(0, 8)
-  source = value.substring(9)
+  const type = value.substr(0, 8)
+  const source = value.substring(9)
 
   switch (type) {
     case '__q_date':
@@ -68,16 +66,20 @@ function decode (value) {
 }
 
 export function getEmptyStorage () {
+  const getVal = () => null
+
   return {
-    has: noop,
-    getLength: noop,
-    getItem: noop,
-    getIndex: noop,
-    getAll: noop,
+    has: () => false,
+    getLength: () => 0,
+    getItem: getVal,
+    getIndex: getVal,
+    getKey: getVal,
+    getAll: () => {},
+    getAllKeys: () => [],
     set: noop,
     remove: noop,
     clear: noop,
-    isEmpty: noop
+    isEmpty: () => true
   }
 }
 
@@ -100,12 +102,27 @@ export function getStorage (type) {
         ? get(webStorage.key(index))
         : null
     },
+    getKey: index => {
+      return index < webStorage.length
+        ? webStorage.key(index)
+        : null
+    },
     getAll: () => {
-      let result = {}, key, len = webStorage.length
+      let key
+      const result = {}, len = webStorage.length
 
       for (let i = 0; i < len; i++) {
         key = webStorage.key(i)
         result[key] = get(key)
+      }
+
+      return result
+    },
+    getAllKeys: () => {
+      const result = [], len = webStorage.length
+
+      for (let i = 0; i < len; i++) {
+        result.push(webStorage.key(i))
       }
 
       return result

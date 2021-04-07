@@ -6,7 +6,8 @@ import PortalMixin from '../../mixins/portal.js'
 import TransitionMixin from '../../mixins/transition.js'
 
 import { getScrollTarget } from '../../utils/scroll.js'
-import { addEvt, cleanEvt, getTouchTarget } from '../../utils/touch.js'
+import { getTouchTarget } from '../../utils/touch.js'
+import { addEvt, cleanEvt } from '../../utils/event.js'
 import { clearSelection } from '../../utils/selection.js'
 import { slot } from '../../utils/slot.js'
 import {
@@ -58,16 +59,21 @@ export default Vue.extend({
     delay: {
       type: Number,
       default: 0
+    },
+
+    hideDelay: {
+      type: Number,
+      default: 0
     }
   },
 
   computed: {
     anchorOrigin () {
-      return parsePosition(this.anchor)
+      return parsePosition(this.anchor, this.$q.lang.rtl)
     },
 
     selfOrigin () {
-      return parsePosition(this.self)
+      return parsePosition(this.self, this.$q.lang.rtl)
     },
 
     hideOnRouteChange () {
@@ -80,9 +86,18 @@ export default Vue.extend({
       this.__showPortal()
 
       this.__nextTick(() => {
+        this.observer = new MutationObserver(() => this.updatePosition())
+        this.observer.observe(this.__portal.$el, { attributes: false, childList: true, characterData: true, subtree: true })
         this.updatePosition()
         this.__configureScrollTarget()
       })
+
+      if (this.unwatch === void 0) {
+        this.unwatch = this.$watch(
+          () => this.$q.screen.width + '|' + this.$q.screen.height + '|' + this.self + '|' + this.anchor + '|' + this.$q.lang.rtl,
+          this.updatePosition
+        )
+      }
 
       this.__setTimeout(() => {
         this.$emit('show', evt)
@@ -99,6 +114,16 @@ export default Vue.extend({
     },
 
     __anchorCleanup () {
+      if (this.observer !== void 0) {
+        this.observer.disconnect()
+        this.observer = void 0
+      }
+
+      if (this.unwatch !== void 0) {
+        this.unwatch()
+        this.unwatch = void 0
+      }
+
       this.__unconfigureScrollTarget()
       cleanEvt(this, 'tooltipTemp')
     },
@@ -155,7 +180,9 @@ export default Vue.extend({
         }, 10)
       }
 
-      this.hide(evt)
+      this.__setTimeout(() => {
+        this.hide(evt)
+      }, this.hideDelay)
     },
 
     __configureAnchorEl () {

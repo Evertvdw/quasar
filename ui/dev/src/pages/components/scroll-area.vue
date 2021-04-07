@@ -2,11 +2,13 @@
   <div class="q-layout-padding">
     <q-toggle v-model="horizontal" label="Horizontal" />
     <q-toggle v-model="customStyle" label="Custom style" />
-    <q-checkbox v-model="alwaysVisible" toggle-indeterminate label="Always visible" />
+    <q-toggle v-model="alwaysVisible" toggle-indeterminate label="Always visible" />
+    <q-toggle v-model="darkVariant" toggle-indeterminate label="Dark variant" />
 
     <div style="height: 300px;" />
 
     <q-scroll-area
+      v-if="!darkVariant"
       ref="scroll"
       style="width: 400px; height: 500px;"
       class="bg-yellow"
@@ -25,6 +27,7 @@
     </q-scroll-area>
 
     <q-scroll-area
+      v-else
       ref="scroll"
       style="width: 400px; height: 500px;"
       class="bg-dark text-white q-mt-lg"
@@ -54,6 +57,9 @@
     <q-btn @click="scroll2">
       Scroll to 525 (animated)
     </q-btn>
+    <q-btn @click="scroll3">
+      Scroll to 90%
+    </q-btn>
 
     <div style="height: 1000px" />
   </div>
@@ -63,6 +69,7 @@
 export default {
   data () {
     return {
+      darkVariant: false,
       number: 10,
       horizontal: false,
       alwaysVisible: true,
@@ -101,6 +108,9 @@ export default {
     },
     scroll2 () {
       this.$refs.scroll.setScrollPosition(525, 1000)
+    },
+    scroll3 () {
+      this.$refs.scroll.setScrollPercentage(0.9, 1000)
     }
   }
 }

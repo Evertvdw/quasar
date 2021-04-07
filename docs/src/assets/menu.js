@@ -101,7 +101,6 @@ const options = [
   },
   {
     name: 'Quasar Icon Sets',
-    badge: 'update',
     path: 'quasar-icon-sets'
   },
   {
@@ -147,82 +146,80 @@ const cli = [
     path: 'installation'
   },
   {
+    name: 'Upgrade guide',
+    path: 'app-upgrade-guide'
+  },
+  {
     name: 'quasar.conf.js',
     path: 'quasar-conf-js'
   },
   {
-    name: 'App Icons',
-    path: 'app-icons'
+    name: 'Browser Compatibility',
+    path: 'browser-compatibility'
+  },
+  {
+    name: 'Supporting TypeScript',
+    path: 'supporting-ts'
+  },
+  {
+    name: 'Directory Structure',
+    path: 'directory-structure'
+  },
+  {
+    name: 'Build Commands',
+    path: 'build-commands'
+  },
+  {
+    name: 'Commands List',
+    path: 'commands-list'
+  },
+  {
+    name: 'CSS Preprocessors',
+    path: 'css-preprocessors'
+  },
+  {
+    name: 'Routing',
+    path: 'routing'
+  },
+  {
+    name: 'Lazy Loading - Code Splitting',
+    path: 'lazy-loading'
+  },
+  {
+    name: 'Handling Assets',
+    path: 'handling-assets'
+  },
+  {
+    name: 'Boot Files',
+    path: 'boot-files'
+  },
+  {
+    name: 'Prefetch Feature',
+    path: 'prefetch-feature'
+  },
+  {
+    name: 'API Proxying',
+    path: 'api-proxying'
+  },
+  {
+    name: 'Handling Webpack',
+    path: 'handling-webpack'
+  },
+  {
+    name: 'Handling process.env',
+    path: 'handling-process-env'
+  },
+  {
+    name: 'Vuex Store',
+    path: 'vuex-store'
+  },
+  {
+    name: 'Linter',
+    path: 'linter'
   },
   {
     name: 'Testing & Auditing',
     path: 'testing-and-auditing'
-  },
-  {
-    name: 'CLI Documentation',
-    path: 'cli-documentation',
-    children: [
-      {
-        name: 'Directory Structure',
-        path: 'directory-structure'
-      },
-      {
-        name: 'Build Commands',
-        path: 'build-commands'
-      },
-      {
-        name: 'Commands List',
-        path: 'commands-list'
-      },
-      {
-        name: 'CSS Preprocessors',
-        path: 'css-preprocessors'
-      },
-      {
-        name: 'Routing',
-        path: 'routing'
-      },
-      {
-        name: 'Lazy Loading - Code Splitting',
-        path: 'lazy-loading'
-      },
-      {
-        name: 'Handling Assets',
-        path: 'handling-assets'
-      },
-      {
-        name: 'Boot Files',
-        path: 'boot-files'
-      },
-      {
-        name: 'Prefetch Feature',
-        path: 'prefetch-feature'
-      },
-      {
-        name: 'API Proxying',
-        path: 'api-proxying'
-      },
-      {
-        name: 'Handling Webpack',
-        path: 'handling-webpack'
-      },
-      {
-        name: 'Handling process.env',
-        path: 'handling-process-env'
-      },
-      {
-        name: 'Vuex Store',
-        path: 'vuex-store'
-      },
-      {
-        name: 'Linter',
-        path: 'linter'
-      },
-      {
-        name: 'Supporting IE',
-        path: 'supporting-ie'
-      }
-    ]
   },
   {
     name: 'Developing SPA',
@@ -257,6 +254,10 @@ const cli = [
       {
         name: 'Writing Universal Code',
         path: 'writing-universal-code'
+      },
+      {
+        name: 'Preparation',
+        path: 'preparation'
       },
       {
         name: 'Configuring SSR',
@@ -305,8 +306,20 @@ const cli = [
         path: 'introduction'
       },
       {
+        name: 'Preparation',
+        path: 'preparation'
+      },
+      {
+        name: 'Build Commands',
+        path: 'build-commands'
+      },
+      {
         name: 'Configuring PWA',
         path: 'configuring-pwa'
+      },
+      {
+        name: 'HMR for PWA',
+        path: 'hmr-for-dev'
       },
       {
         name: 'App Icons for PWA',
@@ -315,16 +328,59 @@ const cli = [
       {
         name: 'Handling Service Worker',
         path: 'handling-service-worker'
-      },
-      {
-        name: 'Build Commands',
-        path: 'build-commands'
       }
     ]
   },
   {
     name: 'Developing Mobile Apps',
     path: 'developing-mobile-apps'
+  },
+  {
+    name: 'Developing Capacitor Apps',
+    path: 'developing-capacitor-apps',
+    children: [
+      {
+        name: 'Introduction',
+        path: 'introduction'
+      },
+      {
+        name: 'Preparation',
+        path: 'preparation'
+      },
+      {
+        name: 'Capacitor versions',
+        badge: 'new',
+        path: 'capacitor-version-support'
+      },
+      {
+        name: 'Configuring Capacitor',
+        path: 'configuring-capacitor'
+      },
+      {
+        name: 'App Icons for Capacitor',
+        path: 'app-icons-capacitor'
+      },
+      {
+        name: 'Capacitor API',
+        path: 'capacitor-api'
+      },
+      {
+        name: 'Build Commands',
+        path: 'build-commands'
+      },
+      {
+        name: 'Troubleshooting and Tips',
+        path: 'troubleshooting-and-tips'
+      },
+      {
+        name: 'Managing Google Analytics',
+        path: 'managing-google-analytics'
+      },
+      {
+        name: 'Publishing to Store',
+        path: 'publishing-to-store'
+      }
+    ]
   },
   {
     name: 'Developing Cordova Apps',
@@ -369,48 +425,6 @@ const cli = [
     ]
   },
   {
-    name: 'Developing Capacitor Apps',
-    path: 'developing-capacitor-apps',
-    children: [
-      {
-        name: 'Introduction',
-        path: 'introduction'
-      },
-      {
-        name: 'Preparation',
-        path: 'preparation'
-      },
-      {
-        name: 'Configuring Capacitor',
-        path: 'configuring-capacitor'
-      },
-      {
-        name: 'App Icons for Capacitor',
-        path: 'app-icons-capacitor'
-      },
-      {
-        name: 'Capacitor API',
-        path: 'capacitor-api'
-      },
-      {
-        name: 'Build Commands',
-        path: 'build-commands'
-      },
-      {
-        name: 'Troubleshooting and Tips',
-        path: 'troubleshooting-and-tips'
-      },
-      {
-        name: 'Managing Google Analytics',
-        path: 'managing-google-analytics'
-      },
-      {
-        name: 'Publishing to Store',
-        path: 'publishing-to-store'
-      }
-    ]
-  },
-  {
     name: 'Developing Electron Apps',
     path: 'developing-electron-apps',
     children: [
@@ -432,12 +446,10 @@ const cli = [
       },
       {
         name: 'Node Integration',
-        badge: 'update',
         path: 'node-integration'
       },
       {
         name: 'Preload Script',
-        badge: 'new',
         path: 'electron-preload-script'
       },
       {
@@ -467,12 +479,85 @@ const cli = [
     ]
   },
   {
+    name: 'Developing Browser Extensions',
+    path: 'developing-browser-extensions',
+    children: [
+      {
+        name: 'Introduction',
+        path: 'introduction'
+      },
+      {
+        name: 'Preparation',
+        path: 'preparation'
+      },
+      {
+        name: 'Configuring BEX',
+        path: 'configuring-bex'
+      },
+      {
+        name: 'App Icons for BEX',
+        path: 'app-icons-browser-extension'
+      },
+      {
+        name: 'Build Commands',
+        path: 'build-commands'
+      },
+      {
+        name: 'Types of BEX',
+        path: 'types-of-bex'
+      },
+      {
+        name: 'BEX Communication / Events',
+        path: 'bex-communication'
+      },
+      {
+        name: 'Background Hooks',
+        path: 'background-hooks'
+      },
+      {
+        name: 'Content Hooks',
+        path: 'content-hooks'
+      },
+      {
+        name: 'DOM Hooks',
+        path: 'dom-hooks'
+      }
+    ]
+  },
+  {
     name: 'Ajax Requests',
     path: 'ajax-requests'
   },
   {
     name: 'Opening Dev Server To Public',
     path: 'opening-dev-server-to-public'
+  }
+]
+
+const icongenie = [
+  {
+    name: 'Introduction',
+    path: 'introduction'
+  },
+
+  {
+    name: 'Installation / Upgrade notes',
+    path: 'installation'
+  },
+
+  {
+    name: 'Command list',
+    path: 'command-list'
+  },
+
+  {
+    name: 'App Icons List',
+    path: 'app-icons-list'
+  },
+
+  {
+    name: 'Profile files',
+    path: 'profile-files'
   }
 ]
 
@@ -507,7 +592,6 @@ const style = [
   },
   {
     name: 'Body classes',
-    badge: 'update',
     path: 'body-classes'
   },
   {
@@ -555,6 +639,10 @@ const layout = [
         path: 'gutter'
       },
       {
+        name: 'Flexbox patterns',
+        path: 'flexbox-patterns'
+      },
+      {
         name: 'Flex Playground',
         path: 'flex-playground'
       }
@@ -595,7 +683,6 @@ const layout = [
   },
   {
     name: 'Page Scroller',
-    badge: 'update',
     path: 'page-scroller'
   }
 ]
@@ -620,6 +707,10 @@ const directives = [
   {
     name: 'Mutation',
     path: 'mutation'
+  },
+  {
+    name: 'Morph',
+    path: 'morph'
   },
   {
     name: 'Scroll',
@@ -674,7 +765,6 @@ const plugins = [
   },
   {
     name: 'Dialog',
-    badge: 'update',
     path: 'dialog'
   },
   {
@@ -695,7 +785,6 @@ const plugins = [
   },
   {
     name: 'Notify',
-    badge: 'update',
     path: 'notify'
   }
 ]
@@ -745,12 +834,10 @@ const components = [
   },
   {
     name: 'Card',
-    badge: 'update',
     path: 'card'
   },
   {
     name: 'Carousel',
-    badge: 'update',
     path: 'carousel'
   },
   {
@@ -783,11 +870,11 @@ const components = [
   },
   {
     name: 'Floating Action Button',
-    badge: 'update',
     path: 'floating-action-button'
   },
   {
     name: 'Form Components',
+    opened: true,
     listPath: 'form-components',
     children: [
       {
@@ -800,7 +887,6 @@ const components = [
       },
       {
         name: 'File picker',
-        badge: 'new',
         path: 'file-picker'
       },
       {
@@ -813,17 +899,14 @@ const components = [
       },
       {
         name: 'Radio',
-        badge: 'update',
         path: 'radio'
       },
       {
         name: 'Checkbox',
-        badge: 'update',
         path: 'checkbox'
       },
       {
         name: 'Toggle',
-        badge: 'update',
         path: 'toggle'
       },
       {
@@ -854,7 +937,6 @@ const components = [
   },
   {
     name: 'Icon',
-    badge: 'update',
     path: 'icon'
   },
   {
@@ -871,7 +953,6 @@ const components = [
   },
   {
     name: 'Intersection',
-    badge: 'update',
     path: 'intersection'
   },
   {
@@ -934,17 +1015,14 @@ const components = [
   },
   {
     name: 'Rating',
-    badge: 'update',
     path: 'rating'
   },
   {
     name: 'Responsive',
-    badge: 'new',
     path: 'responsive'
   },
   {
     name: 'Scroll Area',
-    badge: 'update',
     path: 'scroll-area'
   },
   {
@@ -953,7 +1031,6 @@ const components = [
   },
   {
     name: 'Skeleton',
-    badge: 'new',
     path: 'skeleton'
   },
   {
@@ -982,7 +1059,6 @@ const components = [
   },
   {
     name: 'Table',
-    badge: 'update',
     path: 'table'
   },
   {
@@ -991,7 +1067,6 @@ const components = [
   },
   {
     name: 'Tab Panels',
-    badge: 'update',
     path: 'tab-panels'
   },
   {
@@ -1016,7 +1091,6 @@ const components = [
   },
   {
     name: 'Video',
-    badge: 'update',
     path: 'video'
   },
   {
@@ -1101,12 +1175,15 @@ const utils = [
   },
   {
     name: 'Color Utils',
-    badge: 'update',
     path: 'color-utils'
   },
   {
     name: 'DOM Utils',
     path: 'dom-utils'
+  },
+  {
+    name: 'Morph Utils',
+    path: 'morph-utils'
   },
   {
     name: 'Formatter Utils',
@@ -1118,96 +1195,9 @@ const utils = [
   },
   {
     name: 'Other Utils',
-    badge: 'update',
     path: 'other-utils'
   }
 ]
-
-/*
-// FIREBASE DOCS: UNCOMMENT WHEN READY TO RELEASE
-const firebaseAuthTypes = [{
-  name: 'Email',
-  path: 'email'
-}]
-
-const backends = [
-  {
-    name: 'AWS -- Amplify',
-    path: 'aws-amplify'
-  },
-  {
-    name: 'GraphQL',
-    path: 'graphQL'
-  },
-  {
-    name: 'Feathers JS',
-    path: 'feathersjs'
-  },
-  {
-    name: 'Firebase',
-    opened: false,
-    children: [
-      {
-        name: 'Introduction',
-        path: 'firebase/introduction'
-      },
-      {
-        name: 'Installation',
-        path: 'firebase/install'
-      },
-      {
-        name: 'Service Structure',
-        path: 'firebase/structure'
-      },
-      {
-        name: 'Route Guarding',
-        path: 'firebase/routeGuards'
-      },
-      {
-        name: 'Authentication',
-        path: 'firebase/authTypes',
-        children: firebaseAuthTypes
-      },
-      {
-        name: 'Data Store',
-        path: 'firebase/dataStore'
-      },
-      {
-        name: 'Hosting',
-        path: 'firebase/hosting'
-      },
-      {
-        name: 'Messaging',
-        path: 'firebase/messaging'
-      },
-      {
-        name: 'Storage',
-        path: 'firebase/storage'
-      },
-      {
-        name: 'SSR',
-        path: 'firebase/custom'
-      },
-      {
-        name: 'Vuex',
-        path: 'firebase/vuex'
-      },
-      {
-        name: 'Custom Implementations',
-        path: 'firebase/custom'
-      },
-      {
-        name: 'Firebase CLI',
-        path: 'firebase/cli'
-      }
-    ]
-  },
-  {
-    name: 'Laravel',
-    path: 'laravel'
-  }
-]
-*/
 
 module.exports = [
   {
@@ -1266,6 +1256,12 @@ module.exports = [
     children: cli
   },
   {
+    name: 'Icon Genie CLI',
+    icon: 'stars',
+    path: 'icongenie',
+    children: icongenie
+  },
+  {
     name: 'Style & Identity',
     icon: 'style',
     path: 'style',
@@ -1307,14 +1303,4 @@ module.exports = [
     path: 'quasar-utils',
     children: utils
   }
-
-  /*
-  // FIREBASE DOCS: UNCOMMENT WHEN READY TO RELEASE
-  ,{
-    name: 'Backend & API',
-    icon: 'storage',
-    path: 'backend-and-api',
-    children: backends
-  }
-  */
 ]

@@ -3,15 +3,16 @@ import Vue from 'vue'
 import DarkMixin from '../../mixins/dark.js'
 import OptionSizeMixin from '../../mixins/option-size.js'
 import FormMixin from '../../mixins/form.js'
+import RefocusTargetMixin from '../../mixins/refocus-target.js'
 
 import { stopAndPrevent } from '../../utils/event.js'
 import { slot, mergeSlot } from '../../utils/slot.js'
-import { cache } from '../../utils/vm.js'
+import cache from '../../utils/cache.js'
 
 export default Vue.extend({
   name: 'QRadio',
 
-  mixins: [ DarkMixin, OptionSizeMixin, FormMixin ],
+  mixins: [ DarkMixin, OptionSizeMixin, FormMixin, RefocusTargetMixin ],
 
   props: {
     value: {
@@ -75,6 +76,21 @@ export default Vue.extend({
       if (this.name !== void 0 && this.isTrue === true) {
         return { checked: true }
       }
+    },
+
+    attrs () {
+      const attrs = {
+        tabindex: this.computedTabindex,
+        role: 'radio',
+        'aria-label': this.label,
+        'aria-checked': this.isTrue === true ? 'true' : 'false'
+      }
+
+      if (this.disable === true) {
+        attrs['aria-disabled'] = 'true'
+      }
+
+      return attrs
     }
   },
 
@@ -82,11 +98,11 @@ export default Vue.extend({
     set (e) {
       if (e !== void 0) {
         stopAndPrevent(e)
-        document.activeElement !== null && document.activeElement.blur()
+        this.__refocusTarget(e)
       }
 
       if (this.disable !== true && this.isTrue !== true) {
-        this.$emit('input', this.val)
+        this.$emit('input', this.val, e)
       }
     }
   },
@@ -94,8 +110,8 @@ export default Vue.extend({
   render (h) {
     const content = [
       h('svg', {
-        staticClass: 'q-radio__bg absolute',
-        attrs: { focusable: 'false' /* needed for IE11 */, viewBox: '0 0 24 24' }
+        staticClass: 'q-radio__bg absolute non-selectable',
+        attrs: { focusable: 'false' /* needed for IE11 */, viewBox: '0 0 24 24', 'aria-hidden': 'true' }
       }, [
         h('path', {
           attrs: {
@@ -115,16 +131,20 @@ export default Vue.extend({
     this.disable !== true && this.__injectFormInput(
       content,
       'unshift',
-      'q-radio__native q-ma-none q-pa-none invisible'
+      'q-radio__native q-ma-none q-pa-none'
     )
 
     const child = [
       h('div', {
-        staticClass: 'q-radio__inner relative-position no-pointer-events',
+        staticClass: 'q-radio__inner relative-position',
         class: this.innerClass,
         style: this.sizeStyle
       }, content)
     ]
+
+    if (this.__refocusTargetEl !== void 0) {
+      child.push(this.__refocusTargetEl)
+    }
 
     const label = this.label !== void 0
       ? mergeSlot([ this.label ], this, 'default')
@@ -138,7 +158,7 @@ export default Vue.extend({
 
     return h('div', {
       class: this.classes,
-      attrs: { tabindex: this.computedTabindex },
+      attrs: this.attrs,
       on: cache(this, 'inpExt', {
         click: this.set,
         keydown: e => {

@@ -3,12 +3,14 @@ import Vue from 'vue'
 import { between } from '../../utils/format.js'
 import { setScrollPosition, setHorizontalScrollPosition } from '../../utils/scroll.js'
 import { mergeSlot } from '../../utils/slot.js'
-import { cache } from '../../utils/vm.js'
+import cache from '../../utils/cache.js'
+import debounce from '../../utils/debounce.js'
 
 import QResizeObserver from '../resize-observer/QResizeObserver.js'
 import QScrollObserver from '../scroll-observer/QScrollObserver.js'
 import TouchPan from '../../directives/TouchPan.js'
 import DarkMixin from '../../mixins/dark.js'
+import { ariaHidden } from '../../mixins/attrs'
 
 export default Vue.extend({
   name: 'QScrollArea',
@@ -106,13 +108,13 @@ export default Vue.extend({
     },
 
     containerSize () {
-      return this[`container${this.horizontal === true ? 'Width' : 'Height'}`]
+      return this[`container${this.dirProps.suffix}`]
     },
 
     dirProps () {
       return this.horizontal === true
-        ? { scroll: 'scrollLeft', classSuffix: 'h absolute-bottom', dir: 'right', dist: 'x' }
-        : { scroll: 'scrollTop', classSuffix: 'v absolute-right', dir: 'down', dist: 'y' }
+        ? { prefix: 'horizontal', suffix: 'Width', scroll: 'scrollLeft', classSuffix: 'h absolute-bottom', dir: 'right', dist: 'x' }
+        : { prefix: 'vertical', suffix: 'Height', scroll: 'scrollTop', classSuffix: 'v absolute-right', dir: 'down', dist: 'y' }
     },
 
     thumbClass () {
@@ -123,6 +125,19 @@ export default Vue.extend({
     barClass () {
       return `q-scrollarea__bar--${this.dirProps.classSuffix}` +
         (this.thumbHidden === true ? ' q-scrollarea__bar--invisible' : '')
+    },
+
+    thumbDirectives () {
+      return [{
+        name: 'touch-pan',
+        modifiers: {
+          [ this.horizontal === true ? 'horizontal' : 'vertical' ]: true,
+          prevent: true,
+          mouse: true,
+          mouseAllDir: true
+        },
+        value: this.__panThumb
+      }]
     }
   },
 
@@ -143,6 +158,13 @@ export default Vue.extend({
       fn(this.$refs.target, offset, duration)
     },
 
+    setScrollPercentage (percentage, duration) {
+      this.setScrollPosition(
+        percentage * (this.scrollSize - this.containerSize),
+        duration
+      )
+    },
+
     __updateContainer ({ height, width }) {
       let change = false
 
@@ -159,9 +181,9 @@ export default Vue.extend({
       change === true && this.__startTimer()
     },
 
-    __updateScroll ({ position }) {
-      if (this.scrollPosition !== position) {
-        this.scrollPosition = position
+    __updateScroll (info) {
+      if (this.scrollPosition !== info.position) {
+        this.scrollPosition = info.position
         this.__startTimer()
       }
     },
@@ -226,6 +248,8 @@ export default Vue.extend({
       this.timer = setTimeout(() => {
         this.tempShowing = false
       }, this.delay)
+
+      this.__emitScroll()
     },
 
     __setScroll (offset) {
@@ -269,6 +293,7 @@ export default Vue.extend({
         staticClass: 'q-scrollarea__bar',
         style: this.barStyle,
         class: this.barClass,
+        attrs: ariaHidden,
         on: cache(this, 'bar', {
           mousedown: this.__mouseDown
         })
@@ -279,18 +304,28 @@ export default Vue.extend({
         staticClass: 'q-scrollarea__thumb',
         style: this.style,
         class: this.thumbClass,
-        directives: cache(this, 'thumb#' + this.horizontal, [{
-          name: 'touch-pan',
-          modifiers: {
-            vertical: this.horizontal !== true,
-            horizontal: this.horizontal,
-            prevent: true,
-            mouse: true,
-            mouseAllDir: true
-          },
-          value: this.__panThumb
-        }])
+        attrs: ariaHidden,
+        directives: this.thumbDirectives
       })
     ])
+  },
+
+  created () {
+    // we have lots of listeners, so
+    // ensure we're not emitting same info
+    // multiple times
+    this.__emitScroll = debounce(() => {
+      if (this.$listeners.scroll !== void 0) {
+        const info = { ref: this }
+        const prefix = this.dirProps.prefix
+
+        info[prefix + 'Position'] = this.scrollPosition
+        info[prefix + 'Percentage'] = this.scrollPercentage
+        info[prefix + 'Size'] = this.scrollSize
+        info[prefix + 'ContainerSize'] = this.containerSize
+
+        this.$emit('scroll', info)
+      }
+    }, 0)
   }
 })

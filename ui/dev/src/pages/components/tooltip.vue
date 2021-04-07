@@ -95,6 +95,8 @@
                   <q-radio v-model="anchorOrigin.horizontal" val="left" label="Left" />
                   <q-radio v-model="anchorOrigin.horizontal" val="middle" label="Middle" />
                   <q-radio v-model="anchorOrigin.horizontal" val="right" label="Right" />
+                  <q-radio v-model="anchorOrigin.horizontal" val="start" label="Start" />
+                  <q-radio v-model="anchorOrigin.horizontal" val="end" label="End" />
                 </div>
               </div>
             </div>
@@ -115,6 +117,8 @@
                   <q-radio v-model="selfOrigin.horizontal" val="left" label="Left" />
                   <q-radio v-model="selfOrigin.horizontal" val="middle" label="Middle" />
                   <q-radio v-model="selfOrigin.horizontal" val="right" label="Right" />
+                  <q-radio v-model="selfOrigin.horizontal" val="start" label="Start" />
+                  <q-radio v-model="selfOrigin.horizontal" val="end" label="End" />
                 </div>
               </div>
             </div>
@@ -126,11 +130,13 @@
             <div class="q-gutter-sm">
               <q-toggle label="Delay (0.5s)" v-model="delay" :true-value="500" :false-value="0" />
               <q-toggle label="Colored" v-model="color" />
+              <q-toggle label="Hiding Delay (1s)" v-model="hdelay" :true-value="1000" :false-value="0" />
             </div>
           </q-card-section>
           <q-img src="https://cdn.quasar.dev/img/material.png" style="height: 100px">
             <q-tooltip
               :delay="delay"
+              :hide-delay="hdelay"
               anchor="center middle"
               self="center middle"
               :content-class="color ? 'bg-red' : null"
@@ -213,6 +219,7 @@ export default {
       toggleOn: true,
       loading: false,
       delay: 500,
+      hdelay: 1000,
       vIfTest: true,
       color: true,
       anchorOrigin: { vertical: 'bottom', horizontal: 'middle' },

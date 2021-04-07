@@ -41,6 +41,8 @@ import { Dialog } from 'quasar'
 (Object) this.$q.dialog({ ... })
 ```
 
+Please check the API card to see what the returned Object is.
+
 ### Predefined
 
 ::: tip
@@ -66,6 +68,10 @@ There is a basic validation system that you can use so that the user won't be ab
 <doc-example title="Prompt with validation" file="Dialog/ValidationPrompt" />
 
 <doc-example title="Options with validation" file="Dialog/ValidationOptions" />
+
+### Progress <q-badge align="top" label="v1.13.3+" />
+
+<doc-example title="Showing progress" file="Dialog/Progress" />
 
 ### Using HTML
 You can use HTML on title and message if you specify the `html: true` prop. **Please note that this can lead to XSS attacks**, so make sure that you sanitize the message by yourself.
@@ -171,6 +177,52 @@ export default {
   }
 }
 </script>
+```
+
+## Cordova/Capacitor back button
+Quasar handles the back button for you by default so it can hide any opened Dialogs instead of the default behavior which is to return to the previous page (which is not a nice user experience).
+
+However, should you wish to disable this behavior, edit your /quasar.conf.js file:
+
+```js
+// quasar.conf.js;
+// for Cordova (only!):
+return {
+  framework: {
+    config: {
+      cordova: {
+        // Quasar handles app exit on mobile phone back button.
+        // Requires Quasar v1.9.3+ for true/false, v1.12.6+ for '*' wildcard and array values
+        backButtonExit: true/false/'*'/['/login', '/home', '/my-page'],
+
+        // On the other hand, the following completely
+        // disables Quasar's back button management.
+        // Requires Quasar v1.14.1+
+        backButton: true/false
+      }
+    }
+  }
+}
+
+// quasar.conf.js;
+// for Capacitor (only!)
+// and Quasar v1.9.3+:
+return {
+  framework: {
+    config: {
+      capacitor: {
+        // Quasar handles app exit on mobile phone back button.
+        // Requires Quasar v1.9.3+ for true/false, v1.12.6+ for '*' wildcard and array values
+        backButtonExit: true/false/'*'/['/login', '/home', '/my-page'],
+
+        // On the other hand, the following completely
+        // disables Quasar's back button management.
+        // Requires Quasar v1.14.1+
+        backButton: true/false
+      }
+    }
+  }
+}
 ```
 
 ## Dialog API
