@@ -1,13 +1,12 @@
 import { mount } from '@cypress/vue'
-import { ref } from 'vue'
-import QSelect from '../QSelect'
+import SelectWrapperForm from './SelectWrapperForm.vue'
 
 describe('QSelect', () => {
   // Behavior tests
   describe('Behavior tests', () => {
     describe('(prop): name', () => {
       it('should find name', () => {
-        mount(QSelect, {
+        mount(SelectWrapperForm, {
           props: {
             name: 'select',
             options: [
