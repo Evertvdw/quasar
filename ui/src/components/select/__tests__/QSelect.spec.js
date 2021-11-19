@@ -19,6 +19,21 @@ describe('QSelect', () => {
           .invoke('attr', 'name')
           .should('eq', 'select')
       })
+
+      it('should use for value as name if no name is present', () => {
+        mount(SelectWrapperForm, {
+          attrs: {
+            for: 'notname'
+          }
+        })
+
+        cy.get('.q-select')
+          .should('exist')
+
+        cy.get('.q-select select')
+          .invoke('attr', 'name')
+          .should('eq', 'notname')
+      })
     })
   })
   // Model tests
