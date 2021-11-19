@@ -85,6 +85,49 @@ describe('QSelect', () => {
           .should('not.exist')
       })
     })
+
+    describe('(prop): rules', () => {
+      it('should show a field validation error because of a rule', () => {
+        mount(SelectWrapperForm, {
+          attrs: {
+            rules: [ val => val.length <= 3 || 'Please use maximum 3 characters' ]
+          }
+        })
+
+        cy.get('.q-select')
+          .should('exist')
+          .click()
+          .wait(300)
+          .click()
+          .wait(300)
+
+        cy.get('.text-negative .q-icon')
+          .should('exist')
+          .should('be.visible')
+          .should('contain', 'error')
+
+        cy.get('.q-field__messages')
+          .should('contain', 'Please use maximum 3 characters')
+      })
+
+      it('should show no validation error with rule rule', () => {
+        mount(SelectWrapperForm, {
+          attrs: {
+            rules: [ val => val.length <= 10 || 'Please use maximum 10 characters' ]
+          }
+        })
+
+        cy.get('.q-select')
+          .should('exist')
+          .click()
+          .wait(300)
+          .click()
+          .wait(300)
+
+        cy.get('.text-negative .q-icon')
+          .should('not.exist')
+      })
+    })
   })
   // Model tests
 
