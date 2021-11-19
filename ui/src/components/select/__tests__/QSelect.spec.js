@@ -7,18 +7,15 @@ describe('QSelect', () => {
     describe('(prop): name', () => {
       it('should find name', () => {
         mount(SelectWrapperForm, {
-          props: {
-            name: 'select',
-            options: [
-              'Google', 'Facebook', 'Twitter', 'Apple', 'Oracle'
-            ]
+          attrs: {
+            name: 'select'
           }
         })
 
         cy.get('.q-select')
           .should('exist')
 
-        cy.get('.q-select')
+        cy.get('.q-select select')
           .invoke('attr', 'name')
           .should('eq', 'select')
       })
