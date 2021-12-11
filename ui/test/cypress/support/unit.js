@@ -3,6 +3,7 @@ import '../../../src/css/index.sass'
 // Same for the icons css
 import '@quasar/extras/material-icons/material-icons.css'
 
+import 'cypress-watch-and-reload/support'
 import './commands'
 
 import { config } from '@vue/test-utils'

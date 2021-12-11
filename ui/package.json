@@ -28,7 +28,8 @@
     "test": "yarn lint && yarn build",
     "lint": "eslint --ext .js,.vue src dev",
     "lint-fix": "eslint --ext .js,.vue src dev --fix",
-    "test:unit": "cd ./dev && cypress open-ct && cd .."
+    "test:unit": "cd ./dev && cypress open-ct && cd ..",
+    "test:unit:ci": "cd ./dev && cypress run-ct && cd .."
   },
   "repository": {
     "type": "git",
@@ -70,8 +71,9 @@
     "@rollup/plugin-node-resolve": "^11.2.1",
     "@rollup/plugin-replace": "^2.3.3",
     "babel-preset-es2015-rollup": "^3.0.0",
-    "cypress": "^8.6.0",
+    "cypress": "^9.1.1",
     "cypress-image-snapshot": "^4.0.1",
+    "cypress-watch-and-reload": "^1.5.5",
     "eslint": "^7.4.0",
     "eslint-config-standard": "^16.0.2",
     "eslint-friendly-formatter": "^4.0.1",

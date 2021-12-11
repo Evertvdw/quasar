@@ -20,6 +20,7 @@ const {
 } = require('cypress-image-snapshot/plugin')
 
 module.exports = (on, config) => {
+  require('cypress-watch-and-reload/plugins')(config)
   addMatchImageSnapshotPlugin(on, config)
   on('dev-server:start', async (options) => {
     const webpackConfig = await generateWebpackConfig()

@@ -722,7 +722,62 @@ describe.only('QSelect', () => {
     })
   })
 
-  // Transition tests
+  // Virtual-scroll
+  describe('Virtual-scroll', () => {
+    describe('(prop): virtual-scroll-slice-size', () => {
+      it('???', () => {
+        mount(SelectWrapperForm)
 
-  // Events
+        expect(true).should('be.true')
+      })
+    })
+
+    describe('(prop): virtual-scroll-slice-ratio-before', () => {
+      it('???', () => {
+        mount(SelectWrapperForm)
+
+        expect(true).should('be.true')
+      })
+    })
+
+    describe('(prop): virtual-scroll-slice-ratio-after', () => {
+      it('???', () => {
+        mount(SelectWrapperForm)
+
+        expect(true).should('be.true')
+      })
+    })
+
+    describe('(prop): virtual-scroll-item-size', () => {
+      it('???', () => {
+        mount(SelectWrapperForm)
+
+        expect(true).should('be.true')
+      })
+    })
+
+    describe('(prop): virtual-scroll-sticky-size-start', () => {
+      it('???', () => {
+        mount(SelectWrapperForm)
+
+        expect(true).should('be.true')
+      })
+    })
+
+    describe('(prop): virtual-scroll-sticky-size-end', () => {
+      it('???', () => {
+        mount(SelectWrapperForm)
+
+        expect(true).should('be.true')
+      })
+    })
+
+    describe('(prop): table-colspan', () => {
+      it('???', () => {
+        mount(SelectWrapperForm)
+
+        expect(true).should('be.true')
+      })
+    })
+  })
 })
