@@ -44,7 +44,7 @@ describe.only('QSelect', () => {
           }
         })
         // eslint-disable-next-line no-unused-expressions
-        expect(true).to.be.true
+        assert(true).to.be.true
       })
 
       it('???', () => {
@@ -54,7 +54,7 @@ describe.only('QSelect', () => {
           }
         })
         // eslint-disable-next-line no-unused-expressions
-        expect(true).to.be.true
+        assert(true).to.be.true
       })
     })
 
@@ -131,9 +131,26 @@ describe.only('QSelect', () => {
 
     describe('(prop): reactive-rules', () => {
       it('???', () => {
-        mount(SelectWrapperForm)
+        mount(SelectWrapperForm, {
+          attrs: {
+            rules: [ val => val.length <= 3 || 'Please use maximum 3 characters' ]
+          }
+        })
 
-        expect(true).should('be.true')
+        cy.get('.q-select')
+          .should('exist')
+          .click()
+          .wait(300)
+          .click()
+          .wait(300)
+
+        cy.get('.text-negative .q-icon')
+          .should('exist')
+          .should('be.visible')
+          .should('contain', 'error')
+
+        cy.get('.q-field__messages')
+          .should('contain', 'Please use maximum 3 characters')
       })
     })
 
@@ -141,7 +158,7 @@ describe.only('QSelect', () => {
       it('???', () => {
         mount(SelectWrapperForm)
 
-        expect(true).should('be.true')
+        assert(true).should('be.true')
       })
     })
 
@@ -149,7 +166,7 @@ describe.only('QSelect', () => {
       it('???', () => {
         mount(SelectWrapperForm)
 
-        expect(true).should('be.true')
+        assert(true).should('be.true')
       })
     })
 
@@ -157,7 +174,7 @@ describe.only('QSelect', () => {
       it('???', () => {
         mount(SelectWrapperForm)
 
-        expect(true).should('be.true')
+        assert(true).should('be.true')
       })
     })
 
@@ -165,7 +182,7 @@ describe.only('QSelect', () => {
       it('???', () => {
         mount(SelectWrapperForm)
 
-        expect(true).should('be.true')
+        assert(true).should('be.true')
       })
     })
 
@@ -173,7 +190,7 @@ describe.only('QSelect', () => {
       it('???', () => {
         mount(SelectWrapperForm)
 
-        expect(true).should('be.true')
+        assert(true).should('be.true')
       })
     })
 
@@ -181,7 +198,7 @@ describe.only('QSelect', () => {
       it('???', () => {
         mount(SelectWrapperForm)
 
-        expect(true).should('be.true')
+        assert(true).should('be.true')
       })
     })
 
@@ -189,7 +206,7 @@ describe.only('QSelect', () => {
       it('???', () => {
         mount(SelectWrapperForm)
 
-        expect(true).should('be.true')
+        assert(true).should('be.true')
       })
     })
 
@@ -197,7 +214,7 @@ describe.only('QSelect', () => {
       it('???', () => {
         mount(SelectWrapperForm)
 
-        expect(true).should('be.true')
+        assert(true).should('be.true')
       })
     })
 
@@ -205,7 +222,7 @@ describe.only('QSelect', () => {
       it('???', () => {
         mount(SelectWrapperForm)
 
-        expect(true).should('be.true')
+        assert(true).should('be.true')
       })
     })
 
@@ -213,7 +230,7 @@ describe.only('QSelect', () => {
       it('???', () => {
         mount(SelectWrapperForm)
 
-        expect(true).should('be.true')
+        assert(true).should('be.true')
       })
     })
 
@@ -221,7 +238,7 @@ describe.only('QSelect', () => {
       it('???', () => {
         mount(SelectWrapperForm)
 
-        expect(true).should('be.true')
+        assert(true).should('be.true')
       })
     })
 
@@ -229,7 +246,7 @@ describe.only('QSelect', () => {
       it('???', () => {
         mount(SelectWrapperForm)
 
-        expect(true).should('be.true')
+        assert(true).should('be.true')
       })
     })
 
@@ -237,7 +254,7 @@ describe.only('QSelect', () => {
       it('???', () => {
         mount(SelectWrapperForm)
 
-        expect(true).should('be.true')
+        assert(true).should('be.true')
       })
     })
   })
@@ -248,7 +265,7 @@ describe.only('QSelect', () => {
       it('???', () => {
         mount(SelectWrapperForm)
 
-        expect(true).should('be.true')
+        assert(true).should('be.true')
       })
     })
 
@@ -256,7 +273,7 @@ describe.only('QSelect', () => {
       it('???', () => {
         mount(SelectWrapperForm)
 
-        expect(true).should('be.true')
+        assert(true).should('be.true')
       })
     })
 
@@ -264,7 +281,7 @@ describe.only('QSelect', () => {
       it('???', () => {
         mount(SelectWrapperForm)
 
-        expect(true).should('be.true')
+        assert(true).should('be.true')
       })
     })
 
@@ -272,7 +289,7 @@ describe.only('QSelect', () => {
       it('???', () => {
         mount(SelectWrapperForm)
 
-        expect(true).should('be.true')
+        assert(true).should('be.true')
       })
     })
 
@@ -280,7 +297,7 @@ describe.only('QSelect', () => {
       it('???', () => {
         mount(SelectWrapperForm)
 
-        expect(true).should('be.true')
+        assert(true).should('be.true')
       })
     })
 
@@ -288,7 +305,7 @@ describe.only('QSelect', () => {
       it('???', () => {
         mount(SelectWrapperForm)
 
-        expect(true).should('be.true')
+        assert(true).should('be.true')
       })
     })
 
@@ -296,7 +313,7 @@ describe.only('QSelect', () => {
       it('???', () => {
         mount(SelectWrapperForm)
 
-        expect(true).should('be.true')
+        assert(true).should('be.true')
       })
     })
 
@@ -304,7 +321,7 @@ describe.only('QSelect', () => {
       it('???', () => {
         mount(SelectWrapperForm)
 
-        expect(true).should('be.true')
+        assert(true).should('be.true')
       })
     })
 
@@ -312,7 +329,7 @@ describe.only('QSelect', () => {
       it('???', () => {
         mount(SelectWrapperForm)
 
-        expect(true).should('be.true')
+        assert(true).should('be.true')
       })
     })
 
@@ -320,7 +337,7 @@ describe.only('QSelect', () => {
       it('???', () => {
         mount(SelectWrapperForm)
 
-        expect(true).should('be.true')
+        assert(true).should('be.true')
       })
     })
 
@@ -328,7 +345,7 @@ describe.only('QSelect', () => {
       it('???', () => {
         mount(SelectWrapperForm)
 
-        expect(true).should('be.true')
+        assert(true).should('be.true')
       })
     })
 
@@ -336,7 +353,7 @@ describe.only('QSelect', () => {
       it('???', () => {
         mount(SelectWrapperForm)
 
-        expect(true).should('be.true')
+        assert(true).should('be.true')
       })
     })
 
@@ -344,7 +361,7 @@ describe.only('QSelect', () => {
       it('???', () => {
         mount(SelectWrapperForm)
 
-        expect(true).should('be.true')
+        assert(true).should('be.true')
       })
     })
 
@@ -352,7 +369,7 @@ describe.only('QSelect', () => {
       it('???', () => {
         mount(SelectWrapperForm)
 
-        expect(true).should('be.true')
+        assert(true).should('be.true')
       })
     })
 
@@ -360,7 +377,7 @@ describe.only('QSelect', () => {
       it('???', () => {
         mount(SelectWrapperForm)
 
-        expect(true).should('be.true')
+        assert(true).should('be.true')
       })
     })
 
@@ -368,7 +385,7 @@ describe.only('QSelect', () => {
       it('???', () => {
         mount(SelectWrapperForm)
 
-        expect(true).should('be.true')
+        assert(true).should('be.true')
       })
     })
 
@@ -376,7 +393,7 @@ describe.only('QSelect', () => {
       it('???', () => {
         mount(SelectWrapperForm)
 
-        expect(true).should('be.true')
+        assert(true).should('be.true')
       })
     })
 
@@ -384,7 +401,7 @@ describe.only('QSelect', () => {
       it('???', () => {
         mount(SelectWrapperForm)
 
-        expect(true).should('be.true')
+        assert(true).should('be.true')
       })
     })
   })
@@ -395,7 +412,7 @@ describe.only('QSelect', () => {
       it('???', () => {
         mount(SelectWrapperForm)
 
-        expect(true).should('be.true')
+        assert(true).should('be.true')
       })
     })
   })
@@ -406,7 +423,7 @@ describe.only('QSelect', () => {
       it('???', () => {
         mount(SelectWrapperForm)
 
-        expect(true).should('be.true')
+        assert(true).should('be.true')
       })
     })
 
@@ -414,7 +431,7 @@ describe.only('QSelect', () => {
       it('???', () => {
         mount(SelectWrapperForm)
 
-        expect(true).should('be.true')
+        assert(true).should('be.true')
       })
     })
 
@@ -422,7 +439,7 @@ describe.only('QSelect', () => {
       it('???', () => {
         mount(SelectWrapperForm)
 
-        expect(true).should('be.true')
+        assert(true).should('be.true')
       })
     })
   })
@@ -433,7 +450,7 @@ describe.only('QSelect', () => {
       it('???', () => {
         mount(SelectWrapperForm)
 
-        expect(true).should('be.true')
+        assert(true).should('be.true')
       })
     })
 
@@ -441,7 +458,7 @@ describe.only('QSelect', () => {
       it('???', () => {
         mount(SelectWrapperForm)
 
-        expect(true).should('be.true')
+        assert(true).should('be.true')
       })
     })
 
@@ -449,7 +466,7 @@ describe.only('QSelect', () => {
       it('???', () => {
         mount(SelectWrapperForm)
 
-        expect(true).should('be.true')
+        assert(true).should('be.true')
       })
     })
 
@@ -457,7 +474,7 @@ describe.only('QSelect', () => {
       it('???', () => {
         mount(SelectWrapperForm)
 
-        expect(true).should('be.true')
+        assert(true).should('be.true')
       })
     })
 
@@ -465,7 +482,7 @@ describe.only('QSelect', () => {
       it('???', () => {
         mount(SelectWrapperForm)
 
-        expect(true).should('be.true')
+        assert(true).should('be.true')
       })
     })
 
@@ -473,7 +490,7 @@ describe.only('QSelect', () => {
       it('???', () => {
         mount(SelectWrapperForm)
 
-        expect(true).should('be.true')
+        assert(true).should('be.true')
       })
     })
 
@@ -481,7 +498,7 @@ describe.only('QSelect', () => {
       it('???', () => {
         mount(SelectWrapperForm)
 
-        expect(true).should('be.true')
+        assert(true).should('be.true')
       })
     })
   })
@@ -492,7 +509,7 @@ describe.only('QSelect', () => {
       it('???', () => {
         mount(SelectWrapperForm)
 
-        expect(true).should('be.true')
+        assert(true).should('be.true')
       })
     })
 
@@ -500,7 +517,7 @@ describe.only('QSelect', () => {
       it('???', () => {
         mount(SelectWrapperForm)
 
-        expect(true).should('be.true')
+        assert(true).should('be.true')
       })
     })
 
@@ -508,7 +525,7 @@ describe.only('QSelect', () => {
       it('???', () => {
         mount(SelectWrapperForm)
 
-        expect(true).should('be.true')
+        assert(true).should('be.true')
       })
     })
   })
@@ -519,7 +536,7 @@ describe.only('QSelect', () => {
       it('???', () => {
         mount(SelectWrapperForm)
 
-        expect(true).should('be.true')
+        assert(true).should('be.true')
       })
     })
 
@@ -527,7 +544,7 @@ describe.only('QSelect', () => {
       it('???', () => {
         mount(SelectWrapperForm)
 
-        expect(true).should('be.true')
+        assert(true).should('be.true')
       })
     })
 
@@ -535,7 +552,7 @@ describe.only('QSelect', () => {
       it('???', () => {
         mount(SelectWrapperForm)
 
-        expect(true).should('be.true')
+        assert(true).should('be.true')
       })
     })
 
@@ -543,7 +560,7 @@ describe.only('QSelect', () => {
       it('???', () => {
         mount(SelectWrapperForm)
 
-        expect(true).should('be.true')
+        assert(true).should('be.true')
       })
     })
 
@@ -551,7 +568,7 @@ describe.only('QSelect', () => {
       it('???', () => {
         mount(SelectWrapperForm)
 
-        expect(true).should('be.true')
+        assert(true).should('be.true')
       })
     })
 
@@ -559,7 +576,7 @@ describe.only('QSelect', () => {
       it('???', () => {
         mount(SelectWrapperForm)
 
-        expect(true).should('be.true')
+        assert(true).should('be.true')
       })
     })
   })
@@ -570,7 +587,7 @@ describe.only('QSelect', () => {
       it('???', () => {
         mount(SelectWrapperForm)
 
-        expect(true).should('be.true')
+        assert(true).should('be.true')
       })
     })
 
@@ -578,7 +595,7 @@ describe.only('QSelect', () => {
       it('???', () => {
         mount(SelectWrapperForm)
 
-        expect(true).should('be.true')
+        assert(true).should('be.true')
       })
     })
   })
@@ -589,7 +606,7 @@ describe.only('QSelect', () => {
       it('???', () => {
         mount(SelectWrapperForm)
 
-        expect(true).should('be.true')
+        assert(true).should('be.true')
       })
     })
 
@@ -597,7 +614,7 @@ describe.only('QSelect', () => {
       it('???', () => {
         mount(SelectWrapperForm)
 
-        expect(true).should('be.true')
+        assert(true).should('be.true')
       })
     })
 
@@ -605,7 +622,7 @@ describe.only('QSelect', () => {
       it('???', () => {
         mount(SelectWrapperForm)
 
-        expect(true).should('be.true')
+        assert(true).should('be.true')
       })
     })
 
@@ -613,7 +630,7 @@ describe.only('QSelect', () => {
       it('???', () => {
         mount(SelectWrapperForm)
 
-        expect(true).should('be.true')
+        assert(true).should('be.true')
       })
     })
 
@@ -621,7 +638,7 @@ describe.only('QSelect', () => {
       it('???', () => {
         mount(SelectWrapperForm)
 
-        expect(true).should('be.true')
+        assert(true).should('be.true')
       })
     })
 
@@ -629,7 +646,7 @@ describe.only('QSelect', () => {
       it('???', () => {
         mount(SelectWrapperForm)
 
-        expect(true).should('be.true')
+        assert(true).should('be.true')
       })
     })
 
@@ -637,7 +654,7 @@ describe.only('QSelect', () => {
       it('???', () => {
         mount(SelectWrapperForm)
 
-        expect(true).should('be.true')
+        assert(true).should('be.true')
       })
     })
 
@@ -645,7 +662,7 @@ describe.only('QSelect', () => {
       it('???', () => {
         mount(SelectWrapperForm)
 
-        expect(true).should('be.true')
+        assert(true).should('be.true')
       })
     })
 
@@ -653,7 +670,7 @@ describe.only('QSelect', () => {
       it('???', () => {
         mount(SelectWrapperForm)
 
-        expect(true).should('be.true')
+        assert(true).should('be.true')
       })
     })
 
@@ -661,7 +678,7 @@ describe.only('QSelect', () => {
       it('???', () => {
         mount(SelectWrapperForm)
 
-        expect(true).should('be.true')
+        assert(true).should('be.true')
       })
     })
 
@@ -669,7 +686,7 @@ describe.only('QSelect', () => {
       it('???', () => {
         mount(SelectWrapperForm)
 
-        expect(true).should('be.true')
+        assert(true).should('be.true')
       })
     })
 
@@ -677,7 +694,7 @@ describe.only('QSelect', () => {
       it('???', () => {
         mount(SelectWrapperForm)
 
-        expect(true).should('be.true')
+        assert(true).should('be.true')
       })
     })
 
@@ -685,7 +702,7 @@ describe.only('QSelect', () => {
       it('???', () => {
         mount(SelectWrapperForm)
 
-        expect(true).should('be.true')
+        assert(true).should('be.true')
       })
     })
 
@@ -693,7 +710,7 @@ describe.only('QSelect', () => {
       it('???', () => {
         mount(SelectWrapperForm)
 
-        expect(true).should('be.true')
+        assert(true).should('be.true')
       })
     })
 
@@ -701,7 +718,7 @@ describe.only('QSelect', () => {
       it('???', () => {
         mount(SelectWrapperForm)
 
-        expect(true).should('be.true')
+        assert(true).should('be.true')
       })
     })
 
@@ -709,7 +726,7 @@ describe.only('QSelect', () => {
       it('???', () => {
         mount(SelectWrapperForm)
 
-        expect(true).should('be.true')
+        assert(true).should('be.true')
       })
     })
 
@@ -717,7 +734,7 @@ describe.only('QSelect', () => {
       it('???', () => {
         mount(SelectWrapperForm)
 
-        expect(true).should('be.true')
+        assert(true).should('be.true')
       })
     })
   })
@@ -728,7 +745,7 @@ describe.only('QSelect', () => {
       it('???', () => {
         mount(SelectWrapperForm)
 
-        expect(true).should('be.true')
+        assert(true).should('be.true')
       })
     })
 
@@ -736,7 +753,7 @@ describe.only('QSelect', () => {
       it('???', () => {
         mount(SelectWrapperForm)
 
-        expect(true).should('be.true')
+        assert(true).should('be.true')
       })
     })
 
@@ -744,7 +761,7 @@ describe.only('QSelect', () => {
       it('???', () => {
         mount(SelectWrapperForm)
 
-        expect(true).should('be.true')
+        assert(true).should('be.true')
       })
     })
 
@@ -752,7 +769,7 @@ describe.only('QSelect', () => {
       it('???', () => {
         mount(SelectWrapperForm)
 
-        expect(true).should('be.true')
+        assert(true).should('be.true')
       })
     })
 
@@ -760,7 +777,7 @@ describe.only('QSelect', () => {
       it('???', () => {
         mount(SelectWrapperForm)
 
-        expect(true).should('be.true')
+        assert(true).should('be.true')
       })
     })
 
@@ -768,7 +785,7 @@ describe.only('QSelect', () => {
       it('???', () => {
         mount(SelectWrapperForm)
 
-        expect(true).should('be.true')
+        assert(true).should('be.true')
       })
     })
 
@@ -776,7 +793,7 @@ describe.only('QSelect', () => {
       it('???', () => {
         mount(SelectWrapperForm)
 
-        expect(true).should('be.true')
+        assert(true).should('be.true')
       })
     })
   })
