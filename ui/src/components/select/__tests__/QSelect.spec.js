@@ -427,6 +427,65 @@ describe.only('QSelect', () => {
     })
   })
 
+  // Options tests
+  describe('Options tests', () => {
+    describe('(prop): options', () => {
+      it('???', () => {
+        mount(SelectWrapperForm)
+
+        expect(true).should('be.true')
+      })
+    })
+
+    describe('(prop): option-value', () => {
+      it('???', () => {
+        mount(SelectWrapperForm)
+
+        expect(true).should('be.true')
+      })
+    })
+
+    describe('(prop): option-label', () => {
+      it('???', () => {
+        mount(SelectWrapperForm)
+
+        expect(true).should('be.true')
+      })
+    })
+
+    describe('(prop): option-disable', () => {
+      it('???', () => {
+        mount(SelectWrapperForm)
+
+        expect(true).should('be.true')
+      })
+    })
+
+    describe('(prop): options-dense', () => {
+      it('???', () => {
+        mount(SelectWrapperForm)
+
+        expect(true).should('be.true')
+      })
+    })
+
+    describe('(prop): options-dark', () => {
+      it('???', () => {
+        mount(SelectWrapperForm)
+
+        expect(true).should('be.true')
+      })
+    })
+
+    describe('(prop): options-selected-class', () => {
+      it('???', () => {
+        mount(SelectWrapperForm)
+
+        expect(true).should('be.true')
+      })
+    })
+  })
+
   // Position tests
 
   // Style tests
