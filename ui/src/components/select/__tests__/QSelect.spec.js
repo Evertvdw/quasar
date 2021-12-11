@@ -487,8 +487,240 @@ describe.only('QSelect', () => {
   })
 
   // Position tests
+  describe('Position tests', () => {
+    describe('(prop): menu-anchor', () => {
+      it('???', () => {
+        mount(SelectWrapperForm)
+
+        expect(true).should('be.true')
+      })
+    })
+
+    describe('(prop): menu-self', () => {
+      it('???', () => {
+        mount(SelectWrapperForm)
+
+        expect(true).should('be.true')
+      })
+    })
+
+    describe('(prop): menu-offset', () => {
+      it('???', () => {
+        mount(SelectWrapperForm)
+
+        expect(true).should('be.true')
+      })
+    })
+  })
+
+  // Selection tests
+  describe('Selection tests', () => {
+    describe('(prop): multiple', () => {
+      it('???', () => {
+        mount(SelectWrapperForm)
+
+        expect(true).should('be.true')
+      })
+    })
+
+    describe('(prop): display-value', () => {
+      it('???', () => {
+        mount(SelectWrapperForm)
+
+        expect(true).should('be.true')
+      })
+    })
+
+    describe('(prop): display-value-html', () => {
+      it('???', () => {
+        mount(SelectWrapperForm)
+
+        expect(true).should('be.true')
+      })
+    })
+
+    describe('(prop): hide-selected', () => {
+      it('???', () => {
+        mount(SelectWrapperForm)
+
+        expect(true).should('be.true')
+      })
+    })
+
+    describe('(prop): max-values', () => {
+      it('???', () => {
+        mount(SelectWrapperForm)
+
+        expect(true).should('be.true')
+      })
+    })
+
+    describe('(prop): use-chips', () => {
+      it('???', () => {
+        mount(SelectWrapperForm)
+
+        expect(true).should('be.true')
+      })
+    })
+  })
+
+  // State tests
+  describe('State tests', () => {
+    describe('(prop): disable', () => {
+      it('???', () => {
+        mount(SelectWrapperForm)
+
+        expect(true).should('be.true')
+      })
+    })
+
+    describe('(prop): readonly', () => {
+      it('???', () => {
+        mount(SelectWrapperForm)
+
+        expect(true).should('be.true')
+      })
+    })
+  })
 
   // Style tests
+  describe('Style tests', () => {
+    describe('(prop): label-color', () => {
+      it('???', () => {
+        mount(SelectWrapperForm)
+
+        expect(true).should('be.true')
+      })
+    })
+
+    describe('(prop): color', () => {
+      it('???', () => {
+        mount(SelectWrapperForm)
+
+        expect(true).should('be.true')
+      })
+    })
+
+    describe('(prop): bg-color', () => {
+      it('???', () => {
+        mount(SelectWrapperForm)
+
+        expect(true).should('be.true')
+      })
+    })
+
+    describe('(prop): dark', () => {
+      it('???', () => {
+        mount(SelectWrapperForm)
+
+        expect(true).should('be.true')
+      })
+    })
+
+    describe('(prop): filled', () => {
+      it('???', () => {
+        mount(SelectWrapperForm)
+
+        expect(true).should('be.true')
+      })
+    })
+
+    describe('(prop): outlined', () => {
+      it('???', () => {
+        mount(SelectWrapperForm)
+
+        expect(true).should('be.true')
+      })
+    })
+
+    describe('(prop): borderless', () => {
+      it('???', () => {
+        mount(SelectWrapperForm)
+
+        expect(true).should('be.true')
+      })
+    })
+
+    describe('(prop): standout', () => {
+      it('???', () => {
+        mount(SelectWrapperForm)
+
+        expect(true).should('be.true')
+      })
+    })
+
+    describe('(prop): hide-bottom-space', () => {
+      it('???', () => {
+        mount(SelectWrapperForm)
+
+        expect(true).should('be.true')
+      })
+    })
+
+    describe('(prop): rounded', () => {
+      it('???', () => {
+        mount(SelectWrapperForm)
+
+        expect(true).should('be.true')
+      })
+    })
+
+    describe('(prop): square', () => {
+      it('???', () => {
+        mount(SelectWrapperForm)
+
+        expect(true).should('be.true')
+      })
+    })
+
+    describe('(prop): dense', () => {
+      it('???', () => {
+        mount(SelectWrapperForm)
+
+        expect(true).should('be.true')
+      })
+    })
+
+    describe('(prop): item-aligned', () => {
+      it('???', () => {
+        mount(SelectWrapperForm)
+
+        expect(true).should('be.true')
+      })
+    })
+
+    describe('(prop): popup-content-class', () => {
+      it('???', () => {
+        mount(SelectWrapperForm)
+
+        expect(true).should('be.true')
+      })
+    })
+
+    describe('(prop): popup-content-style', () => {
+      it('???', () => {
+        mount(SelectWrapperForm)
+
+        expect(true).should('be.true')
+      })
+    })
+
+    describe('(prop): input-class', () => {
+      it('???', () => {
+        mount(SelectWrapperForm)
+
+        expect(true).should('be.true')
+      })
+    })
+
+    describe('(prop): input-style', () => {
+      it('???', () => {
+        mount(SelectWrapperForm)
+
+        expect(true).should('be.true')
+      })
+    })
+  })
 
   // Transition tests
 
