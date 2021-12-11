@@ -1,7 +1,7 @@
 import { mount } from '@cypress/vue'
 import SelectWrapperForm from './SelectWrapperForm.vue'
 
-describe('QSelect', () => {
+describe.only('QSelect', () => {
   // Behavior tests
   describe('Behavior tests', () => {
     describe('(prop): name', () => {
@@ -126,6 +126,118 @@ describe('QSelect', () => {
 
         cy.get('.text-negative .q-icon')
           .should('not.exist')
+      })
+    })
+
+    describe('(prop): reactive-rules', () => {
+      it('???', () => {
+        mount(SelectWrapperForm)
+
+        expect(true).should('be.true')
+      })
+    })
+
+    describe('(prop): lazy-rules', () => {
+      it('???', () => {
+        mount(SelectWrapperForm)
+
+        expect(true).should('be.true')
+      })
+    })
+
+    describe('(prop): loading', () => {
+      it('???', () => {
+        mount(SelectWrapperForm)
+
+        expect(true).should('be.true')
+      })
+    })
+
+    describe('(prop): clearable', () => {
+      it('???', () => {
+        mount(SelectWrapperForm)
+
+        expect(true).should('be.true')
+      })
+    })
+
+    describe('(prop): autofocus', () => {
+      it('???', () => {
+        mount(SelectWrapperForm)
+
+        expect(true).should('be.true')
+      })
+    })
+
+    describe('(prop): for', () => {
+      it('???', () => {
+        mount(SelectWrapperForm)
+
+        expect(true).should('be.true')
+      })
+    })
+
+    describe('(prop): hide-dropdown-icon', () => {
+      it('???', () => {
+        mount(SelectWrapperForm)
+
+        expect(true).should('be.true')
+      })
+    })
+
+    describe('(prop): fill-input', () => {
+      it('???', () => {
+        mount(SelectWrapperForm)
+
+        expect(true).should('be.true')
+      })
+    })
+
+    describe('(prop): new-value-mode', () => {
+      it('???', () => {
+        mount(SelectWrapperForm)
+
+        expect(true).should('be.true')
+      })
+    })
+
+    describe('(prop): autocomplete', () => {
+      it('???', () => {
+        mount(SelectWrapperForm)
+
+        expect(true).should('be.true')
+      })
+    })
+
+    describe('(prop): transition-show', () => {
+      it('???', () => {
+        mount(SelectWrapperForm)
+
+        expect(true).should('be.true')
+      })
+    })
+
+    describe('(prop): transition-hide', () => {
+      it('???', () => {
+        mount(SelectWrapperForm)
+
+        expect(true).should('be.true')
+      })
+    })
+
+    describe('(prop): transition-duration', () => {
+      it('???', () => {
+        mount(SelectWrapperForm)
+
+        expect(true).should('be.true')
+      })
+    })
+
+    describe('(prop): behavior', () => {
+      it('???', () => {
+        mount(SelectWrapperForm)
+
+        expect(true).should('be.true')
       })
     })
   })
