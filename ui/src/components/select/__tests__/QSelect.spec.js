@@ -241,6 +241,7 @@ describe.only('QSelect', () => {
       })
     })
   })
+
   // Content tests
   describe('Content tests', () => {
     describe('(prop): table-colspan', () => {
@@ -388,7 +389,43 @@ describe.only('QSelect', () => {
     })
   })
 
+  // General tests
+  describe('General tests', () => {
+    describe('(prop): tabindex', () => {
+      it('???', () => {
+        mount(SelectWrapperForm)
+
+        expect(true).should('be.true')
+      })
+    })
+  })
+
   // Model tests
+  describe('Model tests', () => {
+    describe('(prop): model-value', () => {
+      it('???', () => {
+        mount(SelectWrapperForm)
+
+        expect(true).should('be.true')
+      })
+    })
+
+    describe('(prop): multiple', () => {
+      it('???', () => {
+        mount(SelectWrapperForm)
+
+        expect(true).should('be.true')
+      })
+    })
+
+    describe('(prop): emit-value', () => {
+      it('???', () => {
+        mount(SelectWrapperForm)
+
+        expect(true).should('be.true')
+      })
+    })
+  })
 
   // Position tests
 
